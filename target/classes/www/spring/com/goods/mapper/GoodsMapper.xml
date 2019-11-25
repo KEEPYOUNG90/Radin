@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="www.spring.com.goods.mapper.GoodsMapper">
+	<resultMap id="rm4GoodsVO"
+		type="www.spring.com.goods.model.GoodsVO">
+		<id property="id" column="id" />
+		<result property="name" column="name" />
+		<result property="price" column="price" />
+		<result property="ISBN" column="ISBN" />
+		<result property="publish" column="publish" />
+		<result property="subject" column="subject" />
+		<result property="content" column="content" />
+		<result property="bookindex" column="bookindex" />
+		<result property="pages" column="pages" />
+		<result property="booktype" column="booktype" />
+		<result property="intro" column="intro" />
+		<result property="inside" column="inside" />
+	</resultMap>
+	
+	<insert id="insertGoods">
+		<!-- 생성된 identifier가 주어진 객체에 자동적으로 채워진다. -->
+		<selectKey keyProperty="id" resultType="int" order="BEFORE">
+			select
+			seq_Goods.nextval FROM DUAL
+		</selectKey>
+		MERGE INTO Goods USING DUAL ON (isbn =#{ISBN, jdbcType=VARCHAR})
+		WHEN NOT MATCHED THEN
+		INSERT (id, name, price, ISBN, publish, subject, content, bookindex, pages, weight, booktype, intro, inside)
+		VALUES (#{id}, #{name, jdbcType=VARCHAR}, #{price}, #{ISBN, jdbcType=VARCHAR}, #{publish, jdbcType=VARCHAR}, 
+		#{subject, jdbcType=VARCHAR}, #{content, jdbcType=VARCHAR}, #{bookindex, jdbcType=VARCHAR}, #{pages}, 
+		#{weight, jdbcType=VARCHAR}, #{booktype, jdbcType=VARCHAR},	#{intro, jdbcType=VARCHAR},	#{inside, jdbcType=VARCHAR})
+	</insert>
+	
+	<update id="updateGoods">
+		update Goods
+		SET 
+		name=#{name, jdbcType=VARCHAR}, 
+		price=#{price},  
+		ISBN=#{ISBN, jdbcType=VARCHAR},  
+		publish=#{publish, jdbcType=VARCHAR}, 
+		subject=#{subject, jdbcType=VARCHAR},  
+		content=#{content, jdbcType=VARCHAR},  
+		bookindex=#{bookindex, jdbcType=VARCHAR},  
+		pages=#{pages},  
+		weight=#{weight, jdbcType=VARCHAR},  
+		booktype=#{booktype, jdbcType=VARCHAR},  
+		intro=#{intro, jdbcType=VARCHAR},  
+		inside=#{inside, jdbcType=VARCHAR}  
+		WHERE id=${id}	
+	</update>
+
+	<delete id="deleteGoods">
+		DELETE FROM Goods
+		WHERE id=${id}	
+	</delete>
+
+	
+	<select id="lookUPGoods" resultMap="rm4GoodsVO"> 
+		<![CDATA[ select * from goods where id > 0 ]]>
+	</select>
+
+</mapper>
+
+	
