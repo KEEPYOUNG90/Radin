@@ -1,8 +1,9 @@
 package www.spring.com.pay.model;
 
-public class Pay {
-
-	private int payId;
-	private char method;
+import lombok.Data;
+@Data
+public class Pay{
+	private int id;
+	private char method; 
 	private String state_msg;
 }

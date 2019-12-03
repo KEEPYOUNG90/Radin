@@ -126,4 +126,18 @@ create table t_Category (
 );
 
 
+create table t_Category (
+    id int primary key,
+    name varchar2(100),
+    childId int references t_Category(id)
+);
+
+
+create table t_Category (
+    id int primary key,
+    name varchar2(100),
+    childId int references t_Category(id)
+);
+
+
 create index idx_KW_word on t_keyword(word);
