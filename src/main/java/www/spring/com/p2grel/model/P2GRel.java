@@ -7,6 +7,7 @@ import www.spring.com.p2gtype.model.PGRelType;
 
 @Data
 public abstract class P2GRel {
+	protected int id;
 	protected int amount;
 	protected int saleRecordId;
 	protected int partyId;
