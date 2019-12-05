@@ -40,10 +40,10 @@ public class GoodsMapperTest {
 		goodsMapper.insertGoods(goods);
 	}
 	
-	@Test
+	//@Test
 	public void testLookUPGoods() {
 		try {
-			List<GoodsVO> goods = goodsMapper.lookUPGoods();
+			List<GoodsVO> goods = goodsMapper.();
 			goods.forEach(good->System.out.println(good));
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -73,9 +73,8 @@ public class GoodsMapperTest {
 	
 	@Test
 	public void testdeleteGoods() {
-		GoodsVO goods = new GoodsVO();
-		goods.setId(3);	
-		goodsMapper.deleteGoods(goods);
+		int dd=3;
+		goodsMapper.deleteGoods(dd);
 	}
 	
 	

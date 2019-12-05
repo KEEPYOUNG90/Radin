@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import www.spring.com.goods.model.GoodsVO;
-import www.spring.com.goods.reset.GoodsService;
+import www.spring.com.goods.service.GoodsService;
 
 @Controller
 @RequestMapping("/goods/*")
