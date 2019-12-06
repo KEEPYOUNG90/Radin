@@ -1,7 +1,5 @@
 package www.spring.com.goods.model;
 
-import java.util.Date;
-
 import lombok.Data;
 
 @Data

@@ -16,5 +16,4 @@ public abstract class P2GRel {
 	private int payId;
 	private Date regdate;
 
-	
 }

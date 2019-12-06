@@ -7,8 +7,4 @@ import www.spring.com.p2grel.model.P2GRel;
 import www.spring.com.p2gtype.model.PGRelType;
 @Data
 public class Sellrecord extends P2GRel {
-<<<<<<< HEAD
-	private int PGRelId;
-=======
->>>>>>> f4aea06... 20191204
 }
