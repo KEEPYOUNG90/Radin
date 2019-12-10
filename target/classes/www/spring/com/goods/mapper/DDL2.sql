@@ -24,7 +24,7 @@ create sequence seq_Goods;
 create sequence
 create sequence
 
-
+--id, name, price, ISBN, publish, subject, content, bookindex, pages, weight, booktype, intro, inside, Category_id
 create table t_Goods(
 	id int primary key,
 	name varchar2(50) not null,
@@ -95,7 +95,6 @@ approveNum  varchar2(100),
 customer_id int references t_party(id)
 );
 
-
 create table t_g2KRel (
 	goods_id		int references t_Goods(id),
 	keyword_id		int references t_Keyword(id),
@@ -147,7 +146,6 @@ create table t_Category (
 
 
 create index idx_KW_word on t_keyword(word);
---------------------------------------------------------------------
 
 
 create table t_reply(

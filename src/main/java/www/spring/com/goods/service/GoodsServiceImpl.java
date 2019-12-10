@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import www.spring.com.framework.GoodsCriteria;
+import www.spring.com.framework.PageDTO;
 import www.spring.com.goods.mapper.GoodsMapper;
 import www.spring.com.goods.model.GoodsVO;
 
@@ -35,13 +35,15 @@ public class GoodsServiceImpl implements GoodsService {
 	}
 
 	@Override
-	public List<GoodsVO> getListWithPagingByCondition(GoodsCriteria cri) {
+	public List<GoodsVO> getListWithPagingByCondition(PageDTO cri) {
 		return goodsMapper.getListWithPagingByCondition(cri);
 	}
 
 	@Override
-	public int getTotalCount(GoodsCriteria cri) {
+	public int getTotalCount(PageDTO cri) {
 		return goodsMapper.getTotalCount(cri);
 	}
+	
+	
 
 }
