@@ -13,37 +13,17 @@
 		<result property="content" column="content" />
 		<result property="bookindex" column="bookindex" />
 		<result property="pages" column="pages" />
+		<result property="weight" column="weight" />
 		<result property="booktype" column="booktype" />
 		<result property="intro" column="intro" />
 		<result property="inside" column="inside" />
 	</resultMap>
 	
-	<sql id="criteria">
-		<trim prefix="(" suffix = ")" prefixOverrides="or">
-			<foreach collection="cri.getSearchTypeArr()" item="val">
-				<trim prefix="or">
-					<if test="val=='C'.toString()">
-						content like #{cri.keyword} || '%'
-					</if>
-					<if test="val=='T'.toString()">
-						title like #{cri.keyword} || '%'
-					</if>
-					<if test="val=='W'.toString()">
-						writer like #{cri.keyword} || '%'
-					</if>
-				</trim>
-			</foreach> 
-		</trim>
-	</sql>
 	
 	<select id="getTotalCount" resultType="int">
 		<![CDATA[
-			select count(*) from t_Goods
+			select count(*) from t_Goods where id > 0
 		]]>
-			<where>
-				<include refid="criteria"/> 
-			</where>
-				order by id desc
 	</select>
 	
 	<insert id="insertGoods">
@@ -52,9 +32,9 @@
 			select
 			seq_Goods.nextval FROM DUAL
 		</selectKey>
-		MERGE INTO t_Goods USING DUAL ON (isbn =#{ISBN, jdbcType=VARCHAR})
-		WHEN NOT MATCHED THEN
-		INSERT (id, name, price, ISBN, publish, subject, content, bookindex, pages, weight, booktype, intro, inside)
+		<!-- MERGE INTO t_Goods USING DUAL ON (isbn =#{ISBN, jdbcType=VARCHAR})
+		WHEN NOT MATCHED THEN -->
+		INSERT INTO t_Goods (id, name, price, ISBN, publish, subject, content, bookindex, pages, weight, booktype, intro, inside)
 		VALUES (#{id}, #{name, jdbcType=VARCHAR}, #{price}, #{ISBN, jdbcType=VARCHAR}, #{publish, jdbcType=VARCHAR}, 
 		#{subject, jdbcType=VARCHAR}, #{content, jdbcType=VARCHAR}, #{bookindex, jdbcType=VARCHAR}, #{pages}, 
 		#{weight, jdbcType=VARCHAR}, #{booktype, jdbcType=VARCHAR},	#{intro, jdbcType=VARCHAR},	#{inside, jdbcType=VARCHAR})
@@ -75,18 +55,16 @@
 		booktype=#{booktype, jdbcType=VARCHAR},  
 		intro=#{intro, jdbcType=VARCHAR},  
 		inside=#{inside, jdbcType=VARCHAR}  
-		WHERE id=${id}	
+		WHERE id=#{id}	
 	</update>
-
+	
 	<select id="getListWithPagingByCondition" resultMap="rm4GoodsVO">
 		select * from (
-		  	select *
-		  	  from t_Goods 
+		  	select rownum rn, g.*
+		  	  from t_Goods g
 		  	<where>
-				<include refid="criteria"/> 
 				<![CDATA[
 				and rownum <= #{cri.pageNum} * #{cri.amount}
-				order by id desc
 				]]>
 			</where>
 		)
@@ -106,7 +84,7 @@
 	
 	<delete id="deleteGoods">
 		DELETE FROM t_Goods
-		WHERE id=${id}	
+		WHERE id=#{id}	
 	</delete>
 
 </mapper>
