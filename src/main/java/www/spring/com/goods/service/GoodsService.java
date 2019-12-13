@@ -1,6 +1,7 @@
 package www.spring.com.goods.service;
 
 import java.util.List;
+import java.util.Set;
 
 import org.apache.ibatis.annotations.Param;
 
@@ -14,4 +15,5 @@ public interface GoodsService {
 	public void deleteGoods(int id);
 	public List<GoodsVO> getListWithPagingByCondition(@Param("cri") PageDTO cri);
 	public int getTotalCount(@Param("cri") PageDTO cri);
+	public String useKomoran(String keywordsString);
 }
