@@ -32,8 +32,8 @@
 			select
 			seq_Goods.nextval FROM DUAL
 		</selectKey>
-		<!-- MERGE INTO t_Goods USING DUAL ON (isbn =#{ISBN, jdbcType=VARCHAR})
-		WHEN NOT MATCHED THEN -->
+		MERGE INTO t_Goods USING DUAL ON (isbn =#{ISBN, jdbcType=VARCHAR})
+		WHEN NOT MATCHED THEN
 		INSERT INTO t_Goods (id, name, price, ISBN, publish, subject, content, bookindex, pages, weight, booktype, intro, inside)
 		VALUES (#{id}, #{name, jdbcType=VARCHAR}, #{price}, #{ISBN, jdbcType=VARCHAR}, #{publish, jdbcType=VARCHAR}, 
 		#{subject, jdbcType=VARCHAR}, #{content, jdbcType=VARCHAR}, #{bookindex, jdbcType=VARCHAR}, #{pages}, 
