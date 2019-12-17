@@ -34,6 +34,8 @@ ul li a:hover {
 <ul>
 	<li><a href="#">Home</a></li>
 	<li><a href="goods/listAll.do">책 목록 보기</a></li>
+	
+	<li><li>
 </ul>
 </body>
 </html>
