@@ -1,0 +1,23 @@
+package www.spring.com.p2grel.model;
+
+import java.util.Date;
+
+import lombok.Data;
+import www.spring.com.p2gtype.model.PGRelType;
+
+@Data
+public abstract class P2GRel {
+<<<<<<< HEAD
+=======
+	protected int id;
+>>>>>>> f4aea06... 20191204
+	protected int amount;
+	protected int saleRecordId;
+	protected int partyId;
+	protected int goodsId;
+	protected PGRelType relType;
+	private int payId;
+	private Date regdate;
+
+	
+}
