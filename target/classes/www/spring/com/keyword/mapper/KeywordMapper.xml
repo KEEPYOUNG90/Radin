@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+ "-//mybatis.org//DTD Mapper 3.0//EN" 
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="www.spring.com.keyword.mapper.KeywordMapper">
+	<resultMap id="rm4Keyword"
+		type="www.spring.com.keyword.model.Keyword">
+		<id property="keywordId" column="id" />
+		<result property="word" column="word" />
+	</resultMap>
+	
+	<insert id="insertKeyword" >
+		insert into t_Keyword(id, word)
+		select seq_Keyword.nextval, A.* from(
+		 <foreach item="word" collection="array" separator="UNION ALL " >
+		   select #{word} 
+		   from dual
+		 </foreach>) A
+	</insert>
+	
+</mapper>

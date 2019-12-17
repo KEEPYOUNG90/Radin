@@ -17,5 +17,6 @@ public class GoodsVO {
 	private String booktype;
 	private String intro;
 	private String inside;
-
+	private int	categoryId;
+	
 }

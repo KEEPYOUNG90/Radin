@@ -25,9 +25,9 @@ public class GoodsMapperTest {
 	@Test
 	public void testInsertGoods() {
 			GoodsVO goods = new GoodsVO();
-			goods.setName("이것이 자바다");
+			goods.setName("이것이 자바123다");
 			goods.setPrice(100000);
-			goods.setISBN("20202");
+			goods.setISBN("20202asd42133az");
 			goods.setPublish("2019-02-30");
 			goods.setSubject("대학교재");
 			goods.setContent("우리는 자바에 대해서 배울 것 입니다. 그러므로 자바를 잘 할 수 있게 됩니다.");
@@ -38,12 +38,6 @@ public class GoodsMapperTest {
 			goods.setIntro("ㄴㅇㅎㄶㅇㅎㄶㄴㅇㄹㄴㅇㅎㄴㅇㅎㄴㅇㅍㄶㅎㅇㅎ");
 			goods.setInside("ㄱ0ㅔㅗ헤ㅗ햏");
 			goodsMapper.insertGoods(goods);
-			goodsMapper.insertGoods(goods);
-			goodsMapper.insertGoods(goods);
-			goodsMapper.insertGoods(goods);
-			goodsMapper.insertGoods(goods);
-			
-			goodsMapper.insertGoods(goods);goodsMapper.insertGoods(goods);
 			
 		
 	}

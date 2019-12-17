@@ -31,9 +31,12 @@
 <!--      <mybatis-spring:scan base-package="www.spring.com.sample.mapper"/>-->
     
     <mybatis-spring:scan base-package="www.spring.com.goods.mapper"/>
+    <mybatis-spring:scan base-package="www.spring.com.keyword.mapper"/>
     
     <context:component-scan base-package="www.spring.com"></context:component-scan>
     <context:component-scan base-package="www.spring.com.goods"></context:component-scan>
-    <context:component-scan base-package="www.spring.com.goods.service"></context:component-scan>       
+    <context:component-scan base-package="www.spring.com.goods.service"></context:component-scan>
+    <context:component-scan base-package="www.spring.com.keyword"></context:component-scan>
+    <context:component-scan base-package="www.spring.com.keyword.service"></context:component-scan>       
         
 </beans>

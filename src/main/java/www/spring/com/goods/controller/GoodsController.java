@@ -1,19 +1,27 @@
 package www.spring.com.goods.controller;
 
+import java.net.URLEncoder;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import www.spring.com.framework.PageDTO;
 import www.spring.com.goods.model.GoodsVO;
 import www.spring.com.goods.service.GoodsService;
+import www.spring.com.keyword.service.KeywordService;
 
 @Controller
 @RequestMapping("/goods/*")
@@ -21,6 +29,8 @@ public class GoodsController {
 	
 	@Autowired
 	private GoodsService goodsService;
+	@Autowired
+	private KeywordService keywordService;
 	
 	@RequestMapping("/listAll.do")
 	public String listAllBoard(Model model, PageDTO cri) {
@@ -44,12 +54,27 @@ public class GoodsController {
 	public void insertGoods() {
 	}
 	
+	
 	@PostMapping("/insert.do")
-	public String insertGoods(GoodsVO goodsVO, RedirectAttributes rttr) {
-		
+	public String insertGoods(HttpServletRequest request, GoodsVO goodsVO, RedirectAttributes rttr) {
+		String[] keywords = request.getParameterValues("Keywords");
 		goodsService.insertGoods(goodsVO);
-		rttr.addFlashAttribute("result", goodsVO.getId()); 
+		if(keywords != null) {
+			keywordService.insertKeyword(keywords);
+		}
 		return "redirect:/goods/listAll.do"; 
+	}
+	
+	@PostMapping("/makeHashTag")
+	@ResponseBody
+	public ResponseEntity<String> createReply(@RequestBody String keywordsString) throws Exception{
+		ResponseEntity<String> ret = null;
+		String komoranKeywords = goodsService.useKomoran(keywordsString);
+		komoranKeywords = URLEncoder.encode(komoranKeywords , "UTF-8");
+		
+		ret = new ResponseEntity<>(komoranKeywords, HttpStatus.OK);
+
+		return ret;
 	}
 	 
 	@PostMapping("/update")
