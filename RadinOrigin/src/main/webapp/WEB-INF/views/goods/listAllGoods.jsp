@@ -11,25 +11,76 @@
 	<style>
 		ul{
 			
-			text-align: right;
+			text-align: center;
 			padding-right: 190px;
+		}
+		.pull-righ{
+			text-align: center;
 		}
 		ul li{
 			list-style:none;
 			padding:5px;
 			margin:0px;
 			float:left;
+		}
+		table {
+    		width: 100%;
+  		}
+  		.pull-right {
+			 width: 100%;
+			 text-align: center;
+ 		}
+		.pagination {
+ 			display: inline-block;
 		} 
+
 	</style>
+	  <link href="/resources/vendor/bootstrap/css/main.css" rel="stylesheet">
+	    <!-- Bootstrap core CSS -->
+  <link href="/resources/vendor/bootstrap/css/bootstrap.css?222" rel="stylesheet">
+
+  <!-- Custom fonts for this template -->
+  
+  <link href="/resources/vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+  <link href="/resources/vendor/simple-line-icons/css/simple-line-icons.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+
+  <!-- Custom styles for this template -->
+  <link href="/resources/css/landing-page.min.css" rel="stylesheet">
+	  
 	<title>모든 게시글 보기</title>
 </head>
 <body>
+<!-- Masthead -->
+  <header class="masthead text-white text-center">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-xl-9 mx-auto">
+          <h1 class="mb-5">Build a landing page for your business or project and generate more leads!</h1>
+        </div>
+        <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
+          <form>
+            <div class="form-row">
+              <div class="col-12 col-md-9 mb-2 mb-md-0">
+                <input type="email" class="form-control form-control-lg" placeholder="Enter your email...">
+              </div>
+              <div class="col-12 col-md-3">
+                <button type="submit" class="btn btn-block btn-lg btn-primary">Sign up!</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </header>
 	<ul >
-		<li><a href="insertGoods">등록</a></li>
+		<li><button onclick="resist()" class="button button--ujarak">등록</button></li>
 	</ul>
-	<table>
-		<tr>
-			<th>id</th>
+	<table class="table">
+	<tbody align=center >
+		<tr style="background:#00aaff">
+			<thead><th>id</th>
 			<th>name</th>
 			<th>price</th>
 			<th>ISBN</th>
@@ -37,11 +88,7 @@
 			<th>subject</th>
 			<th>content</th>
 			<th>bookindex</th>
-			<th>pages</th>
-			<th>weight</th>
-			<th>booktype</th>
-			<th>intro</th>
-			<th>inside</th>
+			<th>pages</th></thead>
 		</tr>
 		<c:forEach var="goods" items="${listAllGoods}">
 			<tr>
@@ -58,19 +105,16 @@
 				<td>${goods.content}</td>
 				<td>${goods.bookindex}</td>
 				<td>${goods.pages}</td>
-				<td>${goods.weight}</td>
-				<td>${goods.booktype}</td>
-				<td>${goods.intro}</td>
-				<td>${goods.inside}</td>
 			</tr>
 		</c:forEach>
+	</tbody>	
 	</table>
 	
 	<!-- 페이징 -->
 	<div class='pull-right'>
         <ul class='pagination' >
             <c:if test="${pageMaker.hasPrev}">
-                <li class='paginate_button previous'><a href="${pageMaker.startPage - 1}">Prev</a></li>
+                <ol class='paginate_button previous'><a href="${pageMaker.startPage - 1}">Prev</a></ol>
             </c:if>
             <c:forEach var="num" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
                 <li class="paginate_button ${pageMaker.pageNum == num ? "active":""}">
@@ -124,5 +168,7 @@
 		});
 		
 	});
-	
+	function resist(){
+		location.replace('insertGoods');
+	}	
 </script>
