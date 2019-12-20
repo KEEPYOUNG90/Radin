@@ -8,4 +8,11 @@ public class G2KRel {
 
 	int goodsId;
 	int keywordId;
+	
+	public G2KRel() {}
+	
+	public G2KRel(int goodsId, int keywordId) {
+		this.goodsId = goodsId;
+		this.keywordId = keywordId;
+	}
 }

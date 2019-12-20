@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<<<<<<< HEAD
 <!DOCTYPE mapper PUBLIC
  "-//mybatis.org//DTD Mapper 3.0//EN" 
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-=======
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
->>>>>>> 113727c48b4d5a6c7189d2140d96584cdda191b1
 
 <mapper namespace="www.spring.com.keyword.mapper.KeywordMapper">
 	<resultMap id="rm4Keyword"
@@ -14,41 +10,34 @@
 		<result property="word" column="word" />
 	</resultMap>
 	
-<<<<<<< HEAD
-	<insert id="insertKeyword" >
-		insert into t_Keyword(id, word)
-		select seq_Keyword.nextval, A.* from(
-		 <foreach item="word" collection="array" separator="UNION ALL " >
-		   select #{word} 
-		   from dual
-		 </foreach>) A
+	<select id="selectKeywordIn" resultMap="rm4Keyword">
+		select id,word
+		  from t_keyword
+		 where word in
+		 <!-- '가','나',... -->
+		 <foreach item="beKeyword" collection="list" open="(" separator="," close=")">
+		 	#{beKeyword}
+		 </foreach>
+	</select>
+	
+	<insert id="insertKeyword">
+		<!-- 생성된 identifier가 주어진 객체에 자동적으로 채워진다. -->
+		<selectKey keyProperty="keywordId" resultType="int" order="BEFORE">
+			select
+			seq_Keyword.nextval FROM DUAL
+		</selectKey>
+		INSERT INTO t_keyword(id, word) 
+		VALUES ( #{keywordId}, #{word, jdbcType=VARCHAR}) 
 	</insert>
 	
-=======
-	<!-- <insert id="insertKeyword">
-		생성된 identifier가 주어진 객체에 자동적으로 채워진다.
-		<selectKey keyProperty="id" resultType="int" order="BEFORE">
-			select
-			seq_Keyword.nextval FROM DUAL
-		</selectKey>
-		MERGE INTO t_Keyword USING DUAL ON (word =#{word, jdbcType=VARCHAR})
-		WHEN NOT MATCHED THEN
-		INSERT INTO t_Keyword (id, word)
-		VALUES (#{id}, #{word, jdbcType=VARCHAR})
-	</insert> -->
+	<!-- foreach를 통한 키워드 insert문 
 	<insert id="insertKeyword" >
-        <!-- 생성된 identifier가 주어진 객체에 자동적으로 채워진다. -->
-		<selectKey keyProperty="id" resultType="int" order="BEFORE">
-			select
-			seq_Keyword.nextval FROM DUAL
-		</selectKey>
-		MERGE INTO t_Keyword USING DUAL ON (word =#{word, jdbcType=VARCHAR})
-		WHEN NOT MATCHED THEN
-		INSERT INTO t_Keyword (id, word)
-		VALUES 
-		<foreach item="word" collection="String" separator=" , ">
-			(#{id}, #{word, jdbcType=VARCHAR})
-		</foreach>
-	</insert>
->>>>>>> 113727c48b4d5a6c7189d2140d96584cdda191b1
+		insert into t_keyword(id, word)
+		select seq_keyword.nextval, A.* from(
+		 <foreach item="keyword" collection="list" separator="UNION ALL " >
+		   select #{keyword.word} 
+		   from dual
+		 </foreach>) A
+	</insert> -->
+	
 </mapper>

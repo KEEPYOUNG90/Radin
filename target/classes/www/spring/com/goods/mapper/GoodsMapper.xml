@@ -35,13 +35,8 @@
 		</selectKey>
 		MERGE INTO t_Goods USING DUAL ON (isbn =#{ISBN, jdbcType=VARCHAR})
 		WHEN NOT MATCHED THEN
-<<<<<<< HEAD
 		INSERT (id, name, price, isbn, publish, subject, content, bookindex, pages, weight, booktype, intro, inside)  
 		VALUES ( #{id}, #{name, jdbcType=VARCHAR}, #{price}, #{ISBN, jdbcType=VARCHAR}, #{publish, jdbcType=VARCHAR}, 
-=======
-		INSERT INTO t_Goods (id, name, price, ISBN, publish, subject, content, bookindex, pages, weight, booktype, intro, inside)
-		VALUES (#{id}, #{name, jdbcType=VARCHAR}, #{price}, #{ISBN, jdbcType=VARCHAR}, #{publish, jdbcType=VARCHAR}, 
->>>>>>> 113727c48b4d5a6c7189d2140d96584cdda191b1
 		#{subject, jdbcType=VARCHAR}, #{content, jdbcType=VARCHAR}, #{bookindex, jdbcType=VARCHAR}, #{pages}, 
 		#{weight, jdbcType=VARCHAR}, #{booktype, jdbcType=VARCHAR},	#{intro, jdbcType=VARCHAR},	#{inside, jdbcType=VARCHAR} )
 	</insert>

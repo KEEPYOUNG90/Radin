@@ -10,15 +10,15 @@
 <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 </head>
 <body>
-	<form name="newGoods" action="insert.do" method="post">
+	<form name="newGoods" action="insert.do" method="post" > <!-- onsubmit="return validate();"> -->
 			name:<input type="text" class="inTxt" name="name"><br>
-			price:<input type="text" name="price"><br>
+			price:<input type="text" id="id" name="price"><br>
 			ISBN: <input type="text" name="ISBN"><br>
 			publish:<input type="text" name="publish"><br>
 			subject:<input type="text" class="inTxt"  name="subject"><br>
 			content:<input type="text" class="inTxt"  name="content"><br>
 			bookindex:<input type="text" name="bookindex"><br>
-			pages:<input type="text" name="pages"><br>
+			pages:<input type="text" id="pages" name="pages"><br>
 			weight:<input type="text" name="weight"><br>
 			booktype:<input type="text" name="booktype"><br>
 			intro:<input type="text" class="inTxt"  name="intro"><br>
@@ -43,13 +43,9 @@
 <script type="text/javascript">
 	function gatherText(){
 		var fullStr ="";
-		//var selected = $(".inTxt")[0];
-	    //var selectedVal = selected.val();
-	    //console.log(selectedVal);
 		var inputs = $(".inTxt");
 		for(var i = 0 , len = inputs.length ; i < len ; i++){
 			fullStr += inputs[i].value + " ";
-			console.log("for:"+fullStr);
 		}
 		var Cw = /\ /g;
 		fullStr = fullStr.replace(Cw, ",");
@@ -62,12 +58,9 @@
 			success : function(result, status, xhr) {
 				var Ca = /\+/g;
 				result = decodeURIComponent(result.replace(Ca, " ") );
-<<<<<<< HEAD
 						result = result.split(', ');
 						result.forEach(function(keyword){
 							if(keyword != ''){	
-								//$('.keyword_list').append("<li><span>"+keyword+
-								//		"</span><button  type='button' class='btn_del ico_sprites'><span class='wa'>X</span></button></li>");
 								$('.keyword_list').append("<li><span>"+keyword+
 										"</span><a href='javascript:;' class='btn_del ico_sprites'><span class='wa'>X</span></a></li>");
 								
@@ -75,29 +68,18 @@
 						});
 						
 							
-=======
-
-				result = result.split(', ');
-				result.forEach(function(keyword){
-					$('.keyword_list').append("<li><span>"+keyword+
-							"</span><a href='javascript:;' class='btn_del ico_sprites'><span class='wa'>X</span></a></li>");
-				});
-				
-				
->>>>>>> 113727c48b4d5a6c7189d2140d96584cdda191b1
 			},
 			error : function (xhr, status, er) {
 				if (error) {
 					error(er);
 				}
 			}
-<<<<<<< HEAD
 			
 		});
 	}
+	//동적으로 a 읽기
 	$(".keyword_list").on("click", "a", function(e){
 		 $('.keyword_list li').each(function(){
-			 console.log("dsd");
 		        $(this).find('.btn_del').click(function(){		        	
 		            var li = $(this).parent('li');
 		            var	txt = li.children('span').text();
@@ -106,11 +88,6 @@
 		 });
 	});
 	 
-=======
-		});
-	}
-	
->>>>>>> 113727c48b4d5a6c7189d2140d96584cdda191b1
 	$('.add_tag_wrap').find('.btn').click(function(){
 	    var selected = $('.add_tag_wrap .hashtag');
 	    var selectedVal = selected.val();
@@ -127,29 +104,15 @@
 	    });
 	   
 	    if(!isDuple){
-<<<<<<< HEAD
 	    	if(selectedVal != ''){	
-	    		//$('.keyword_list').append('<li><span>'+selectedVal+'</span><a href="javascript:;" type=\'button\' class="btn_del ico_sprites"><span class="wa">X</span></a></li>');
 	    		$('.keyword_list').append("<li><span>"+selectedVal+
 				"</span><a href='javascript:;' class='btn_del ico_sprites'><span class='wa'>X</span></a></li>");
 	    	}
 	    }
-	    
 	     
-=======
-	    	$('.keyword_list').append('<li><span>'+selectedVal+'</span><a href="javascript:;" class="btn_del ico_sprites"><span class="wa">X</span></a></li>');
-	    }
-	    
-	    $('.keyword_list > li').each(function(){
-	        $(this).find('.btn_del').click(function(){
-	            var li = $(this).parent('li'),
-	                txt = li.children('span').text();
-	            li.remove();
-	        });
-	    });
->>>>>>> 113727c48b4d5a6c7189d2140d96584cdda191b1
 	});
 	
+	//등록 버튼 클릭
 	var formObj = $("form[name='newGoods']");
 	$("#registPost").on("click", function(e){
 		var RemainingKeyword = gatherRemainingKeywords();
@@ -159,18 +122,51 @@
 	function gatherRemainingKeywords() {
 		var RemainingKeyword = "";
 		$(".keyword_list li").each(function(idx){
-<<<<<<< HEAD
-			RemainingKeyword += "<input type='hidden' name='Keywords' value='" + $(this).children('span').text() + "'>";
-=======
-			RemainingKeyword += "<input type='hidden' name='Keyword"+ idx +"' value='" + $(this).children('span').text() + "'>";
->>>>>>> 113727c48b4d5a6c7189d2140d96584cdda191b1
+			RemainingKeyword += "<input type='hidden' name='keywords' value='" + $(this).children('span').text() + "'>";
 		});
 		return RemainingKeyword;
 	}
 	
-<<<<<<< HEAD
+	//submit클릭 시 전 처리 (가격과 페이지 숫자 판별)
+	function validate(){
+		var re = /^[0-9]*$/; /*/^[0-9]*$/   /^[0-9]+$/  /^[0-9]*$/ 후보 정규식*/
+		var price = $("input[name='price']");
+		alert(price.val());
+		var pages = $("input[name='pages']");
+		if(!isNumeric(price.val())){
+			alert("가격은 숫자만 입력해 주세요.");
+			return false;
+		}
+		if(!isNumeric(pages.val())){
+			alert("페이지는 숫자만 입력해 주세요.");
+			return false;
+		}
+		/* if(!check(re,ex,"정규식도 틀렷을걸")){
+			return false;
+		}
+		if(!check(re,price,"가격은 숫자만 입력해 주세요.")){
+			return false;
+		}
+		if(!check(re,pages,"페이지는 숫자만 입력해 주세요.")){
+			return false;
+		} */
+		var RemainingKeyword = gatherRemainingKeywords();
+		formObj.append(RemainingKeyword).submit();
+	}
+	//숫자만 true로 리턴
+	function isNumeric(data) {
+		  return !isNaN(data);
+	}
+	//비교 검사 함수
+	function check(re, what, message) {
+	    if(re.test(what.val())) {
+	        return true;
+	    }
+	    alert(message);
+	    what.value = "";
+	    what.focus();
+	    //return false;
+	}
 
 	
-=======
->>>>>>> 113727c48b4d5a6c7189d2140d96584cdda191b1
 </script>

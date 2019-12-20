@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC
+ "-//mybatis.org//DTD Mapper 3.0//EN" 
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="www.spring.com.g2krel.mapper.G2KRelMapper">
+	<resultMap id="rm4G2KRel"
+		type="www.spring.com.g2krel.model.G2KRel">
+		<id property="goodsId" column="goods_id" />
+		<id property="keywordId" column="keyword_id" />
+	</resultMap>
+	
+	<insert id="insertG2K">
+  		insert all
+		<foreach item="g2krel" collection="list" open="" separator="" close="">
+  		 into t_g2krel(goods_id, keyword_id)
+		  values(#{g2krel.goodsId}, #{g2krel.keywordId})
+		</foreach>		
+		select 1 from dual
+	</insert>
+	
+</mapper>

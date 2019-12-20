@@ -24,14 +24,10 @@ public class KeywordMapperTest {
 
 	@Test
 	public void testInsertGoods() {
-			List<String> list = new ArrayList<>();
-			list.add("테스트");
-			list.add("키워드");
-			list.add("넣기");
-			String[] arr = {"두번째","해본다"};
-			
-			Mapper.insertKeyword(arr);
-			
+		List<Keyword> key = Mapper.getAllKeyword();
+		for(Keyword k : key) {
+			System.out.println(k.getWord());
+		}
 		
 	}
 	
