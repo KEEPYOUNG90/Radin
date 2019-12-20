@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<<<<<<< HEAD
 <!DOCTYPE mapper PUBLIC
  "-//mybatis.org//DTD Mapper 3.0//EN" 
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+=======
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+>>>>>>> 113727c48b4d5a6c7189d2140d96584cdda191b1
 
 <mapper namespace="www.spring.com.keyword.mapper.KeywordMapper">
 	<resultMap id="rm4Keyword"
@@ -10,6 +14,7 @@
 		<result property="word" column="word" />
 	</resultMap>
 	
+<<<<<<< HEAD
 	<insert id="insertKeyword" >
 		insert into t_Keyword(id, word)
 		select seq_Keyword.nextval, A.* from(
@@ -19,4 +24,31 @@
 		 </foreach>) A
 	</insert>
 	
+=======
+	<!-- <insert id="insertKeyword">
+		생성된 identifier가 주어진 객체에 자동적으로 채워진다.
+		<selectKey keyProperty="id" resultType="int" order="BEFORE">
+			select
+			seq_Keyword.nextval FROM DUAL
+		</selectKey>
+		MERGE INTO t_Keyword USING DUAL ON (word =#{word, jdbcType=VARCHAR})
+		WHEN NOT MATCHED THEN
+		INSERT INTO t_Keyword (id, word)
+		VALUES (#{id}, #{word, jdbcType=VARCHAR})
+	</insert> -->
+	<insert id="insertKeyword" >
+        <!-- 생성된 identifier가 주어진 객체에 자동적으로 채워진다. -->
+		<selectKey keyProperty="id" resultType="int" order="BEFORE">
+			select
+			seq_Keyword.nextval FROM DUAL
+		</selectKey>
+		MERGE INTO t_Keyword USING DUAL ON (word =#{word, jdbcType=VARCHAR})
+		WHEN NOT MATCHED THEN
+		INSERT INTO t_Keyword (id, word)
+		VALUES 
+		<foreach item="word" collection="String" separator=" , ">
+			(#{id}, #{word, jdbcType=VARCHAR})
+		</foreach>
+	</insert>
+>>>>>>> 113727c48b4d5a6c7189d2140d96584cdda191b1
 </mapper>

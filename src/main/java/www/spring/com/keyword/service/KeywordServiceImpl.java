@@ -1,5 +1,10 @@
 package www.spring.com.keyword.service;
 
+<<<<<<< HEAD
+=======
+import java.util.List;
+
+>>>>>>> 113727c48b4d5a6c7189d2140d96584cdda191b1
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +16,11 @@ public class KeywordServiceImpl implements KeywordService {
 	private KeywordMapper keywordMapper;
 	
 	@Override
+<<<<<<< HEAD
 	public int insertKeyword(String[] Keywords) {
+=======
+	public int insertKeyword(List<String> Keywords) {
+>>>>>>> 113727c48b4d5a6c7189d2140d96584cdda191b1
 		return keywordMapper.insertKeyword(Keywords);
 	}
 

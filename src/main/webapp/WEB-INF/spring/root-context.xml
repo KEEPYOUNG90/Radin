@@ -36,7 +36,10 @@
     <context:component-scan base-package="www.spring.com"></context:component-scan>
     <context:component-scan base-package="www.spring.com.goods"></context:component-scan>
     <context:component-scan base-package="www.spring.com.goods.service"></context:component-scan>
+<<<<<<< HEAD
     <context:component-scan base-package="www.spring.com.keyword"></context:component-scan>
+=======
+>>>>>>> 113727c48b4d5a6c7189d2140d96584cdda191b1
     <context:component-scan base-package="www.spring.com.keyword.service"></context:component-scan>       
         
 </beans>

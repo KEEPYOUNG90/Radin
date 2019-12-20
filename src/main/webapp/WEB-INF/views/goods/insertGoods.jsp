@@ -62,6 +62,7 @@
 			success : function(result, status, xhr) {
 				var Ca = /\+/g;
 				result = decodeURIComponent(result.replace(Ca, " ") );
+<<<<<<< HEAD
 						result = result.split(', ');
 						result.forEach(function(keyword){
 							if(keyword != ''){	
@@ -74,12 +75,23 @@
 						});
 						
 							
+=======
+
+				result = result.split(', ');
+				result.forEach(function(keyword){
+					$('.keyword_list').append("<li><span>"+keyword+
+							"</span><a href='javascript:;' class='btn_del ico_sprites'><span class='wa'>X</span></a></li>");
+				});
+				
+				
+>>>>>>> 113727c48b4d5a6c7189d2140d96584cdda191b1
 			},
 			error : function (xhr, status, er) {
 				if (error) {
 					error(er);
 				}
 			}
+<<<<<<< HEAD
 			
 		});
 	}
@@ -94,6 +106,11 @@
 		 });
 	});
 	 
+=======
+		});
+	}
+	
+>>>>>>> 113727c48b4d5a6c7189d2140d96584cdda191b1
 	$('.add_tag_wrap').find('.btn').click(function(){
 	    var selected = $('.add_tag_wrap .hashtag');
 	    var selectedVal = selected.val();
@@ -110,6 +127,7 @@
 	    });
 	   
 	    if(!isDuple){
+<<<<<<< HEAD
 	    	if(selectedVal != ''){	
 	    		//$('.keyword_list').append('<li><span>'+selectedVal+'</span><a href="javascript:;" type=\'button\' class="btn_del ico_sprites"><span class="wa">X</span></a></li>');
 	    		$('.keyword_list').append("<li><span>"+selectedVal+
@@ -118,6 +136,18 @@
 	    }
 	    
 	     
+=======
+	    	$('.keyword_list').append('<li><span>'+selectedVal+'</span><a href="javascript:;" class="btn_del ico_sprites"><span class="wa">X</span></a></li>');
+	    }
+	    
+	    $('.keyword_list > li').each(function(){
+	        $(this).find('.btn_del').click(function(){
+	            var li = $(this).parent('li'),
+	                txt = li.children('span').text();
+	            li.remove();
+	        });
+	    });
+>>>>>>> 113727c48b4d5a6c7189d2140d96584cdda191b1
 	});
 	
 	var formObj = $("form[name='newGoods']");
@@ -129,11 +159,18 @@
 	function gatherRemainingKeywords() {
 		var RemainingKeyword = "";
 		$(".keyword_list li").each(function(idx){
+<<<<<<< HEAD
 			RemainingKeyword += "<input type='hidden' name='Keywords' value='" + $(this).children('span').text() + "'>";
+=======
+			RemainingKeyword += "<input type='hidden' name='Keyword"+ idx +"' value='" + $(this).children('span').text() + "'>";
+>>>>>>> 113727c48b4d5a6c7189d2140d96584cdda191b1
 		});
 		return RemainingKeyword;
 	}
 	
+<<<<<<< HEAD
 
 	
+=======
+>>>>>>> 113727c48b4d5a6c7189d2140d96584cdda191b1
 </script>

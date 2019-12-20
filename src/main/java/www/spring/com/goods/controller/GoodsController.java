@@ -56,12 +56,19 @@ public class GoodsController {
 	
 	
 	@PostMapping("/insert.do")
+<<<<<<< HEAD
 	public String insertGoods(HttpServletRequest request, GoodsVO goodsVO, RedirectAttributes rttr) {
 		String[] keywords = request.getParameterValues("Keywords");
 		goodsService.insertGoods(goodsVO);
 		if(keywords != null) {
 			keywordService.insertKeyword(keywords);
 		}
+=======
+	public String insertGoods(GoodsVO goodsVO, List<String> Keywords, RedirectAttributes rttr) {
+		
+		goodsService.insertGoods(goodsVO);
+		keywordService.insertKeyword(Keywords);
+>>>>>>> 113727c48b4d5a6c7189d2140d96584cdda191b1
 		return "redirect:/goods/listAll.do"; 
 	}
 	
